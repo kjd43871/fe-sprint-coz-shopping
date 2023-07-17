@@ -1,11 +1,11 @@
-import Header from './component/Header';
-import Footer from './component/Footer';
+import Main from './pages/Main';
+import './base.css';
+import { BrowserRouter, Route,Router } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Footer/>
+     <Main />
     </div>
 
   );
