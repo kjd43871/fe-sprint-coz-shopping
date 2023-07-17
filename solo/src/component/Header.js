@@ -1,5 +1,4 @@
-import Products from "../pages/Products";
-import Bookmark from "../pages/Bookmark";
+import { AiOutlineGift, AiOutlineStar } from "react-icons/ai";
 import styled from "styled-components";
 import React, { useState } from "react";
 
@@ -48,20 +47,71 @@ const HamburgerImage = styled.img`
 
 const DropdownMenu = styled.div`
   position: absolute;
-  top: 100%;
-  right: 0;
-  width: 160px;
+  top: 85px;
+  right: 38px;
+  width: 235px;
+  border-radius: 20px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.1));
   padding: 8px;
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  cursor: auto;
+
+  &::before{
+      content: '';
+      border-bottom: 20px solid #fff;
+      border-top: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-left: 10px solid transparent;
+      position: absolute;
+      top: -28px;
+      right: 50px;
+    }
+
+    &::after{
+      content: '';
+      width: 100%;
+      height: 100%;
+      display: block;
+      /* box-shadow: 0 0 8px rgba(0, 0, 0,0.1); */
+    }
 `;
 
 const DropdownMenuItem = styled.div`
+  position: relative;
   margin-bottom: 8px;
+  display: flex;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  padding: 15px 25px;
+  font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+
+  &:hover{
+    background-color: #f8f8f8;
+  }
+
+
+  &:first-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+  }
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  > a{
+    display: flex;
+    align-items: center;
+    color: #000;
+  }
+
+  >a>.icon {
+        font-size: 1.4rem;
+        margin-right: 5px;
   }
 `;
 
@@ -84,12 +134,12 @@ export default function Header() {
         onClick={Dropdown}
       />
       <DropdownMenu isOpen={isDropdownOpen}>
-        <DropdownMenuItem>OOO님, 안녕하세요</DropdownMenuItem>
+        <DropdownMenuItem>OOO님, 안녕하세요!</DropdownMenuItem>
         <DropdownMenuItem>
-          <a href="/products">상품목록</a>
+          <a href="/products"><AiOutlineGift className="icon" />상품리스트 페이지</a>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <a href="/bookmark">북마크</a>
+          <a href="/bookmark"><AiOutlineStar className="icon" />북마크 페이지</a>
         </DropdownMenuItem>
       </DropdownMenu>
     </HeaderContainer>
