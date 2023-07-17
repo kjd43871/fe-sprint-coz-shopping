@@ -1,62 +1,97 @@
-import { AiOutlineMenu, AiOutlineGift, AiOutlineStar } from "react-icons/ai";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Products from "../pages/Products";
 import Bookmark from "../pages/Bookmark";
-import styled from "styled-components"
+import styled from "styled-components";
+import React, { useState } from "react";
 
-const HeaderCont = styled.header`
-  position: sticky;
-  top: 0;
+
+const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  background-color: #ffffff;
+  max-width: 1280;
+  height: 80px;
   padding: 0 76px;
-  box-shadow: 0 8px 8px rgba(0, 0, 0,0.1);
-  align-items: center;
+  box-shadow: 0px 8px 8px rgba(0,0,0,0.1);
 `;
 
-const Logo = styled.h1`
+const LogoContainer = styled.div`
   display: flex;
-  vertical-align: middle;
-  font-size: 2rem;
-  color: #000;
-  font-weight: bold;
-`
+  align-items: center;
+  background-color: #ffffff;
+`;
+
+const LogoImage = styled.img`
+  width: 55px;
+  height: 30px;
+  margin-right: 12px;
+  top: 25px;
+  background-color: #ffffff;
+  cursor: pointer;
+`;
+
 const LogoTitle = styled.span`
-  padding-left: 12px;
+  width: 230px;
+  height: 45.63px;
+  font-size: 32px;
+  font-weight: bold;
+  background-color: #ffffff;
+  cursor: pointer;
 `;
 
-const BurgerBtn = styled.button`
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const HamburgerImage = styled.img`
+  height: 24px;
+  background-color: #ffffff;
+  cursor:pointer;
+`;
 
-`
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 160px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+`;
 
-function Header() {
+const DropdownMenuItem = styled.div`
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+export default function Header() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const Dropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
-    <BrowserRouter>
-      <HeaderCont>
-        <Link to="/">
-          <Logo><img src='logo.png' alt="logo"></img>
-          <LogoTitle>
-          <span className="logo-title">Coz Shopping</span>
-          </LogoTitle>
-          </Logo>
-        </Link>
-        <BurgerBtn>
-          <AiOutlineMenu />
-          <nav>
-          </nav>
-        </BurgerBtn>
-      </HeaderCont>
-      <Routes>
-        {/* 경로는 path로 컴포넌트는 element로 연결해 줍니다. */}
-        <Route path="/pages/Products" element={<Products />} />
-        <Route path="/pages/Bookmark" element={<Bookmark />} />
-      </Routes>
-    </BrowserRouter>
-  )
+    <HeaderContainer>
+      <LogoContainer>
+        <LogoImage src="logo.png" alt="logo" />
+        <LogoTitle>COZ Shopping</LogoTitle>
+      </LogoContainer>
+      <HamburgerImage
+        src="hamburger.png"
+        alt="hamburger menu"
+        onClick={Dropdown}
+      />
+      <DropdownMenu isOpen={isDropdownOpen}>
+        <DropdownMenuItem>OOO님, 안녕하세요</DropdownMenuItem>
+        <DropdownMenuItem>
+          <a href="/products">상품목록</a>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <a href="/bookmark">북마크</a>
+        </DropdownMenuItem>
+      </DropdownMenu>
+    </HeaderContainer>
+  );
 }
-
-export default Header;

@@ -1,4 +1,5 @@
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 
 const FooterCont = styled.footer`
   display: flex;
@@ -12,53 +13,30 @@ const FooterCont = styled.footer`
   padding: 15px 0;
 `
 
-const FooterMenu = styled.ul`
+const FooterMenu = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
 
-  >ul {
-    display: flex;
-    flex-direction: row;
-  }
-
-  >li{
+  >span{
     position: relative;
+    background-color: #fff;
   }
-
-  >li > a{
-    color: #888;
-    padding: 0 10px;
-    
-  }
-
-  >li::after{
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 1px;
-    height: 100%;
-    background-color: #888;
-    display: block;
-  }
-
-  >li:last-child::after{
-    display: none;
-  }
-
+`
+const Footertext = styled.p`
+background-color: #fff;
 `
 
 function Footer() {
   return (
     <FooterCont>
       <FooterMenu>
-        <ul>
-        <li><a href="/" target="" title="바로가기">개인정보 처리방침</a></li>
-        <li><a href="/" target="" title="바로가기">이용 약관</a></li>
-        </ul>
-      </FooterMenu>
-      <p>All rights reserved @ Codestates</p>
+        <span>개인정보 처리방침 ｜ 이용 약관</span>
+        </FooterMenu>
+      <Footertext>
+      All rights reserved @ Codestates
+      </Footertext>
     </FooterCont>
   )
 }
